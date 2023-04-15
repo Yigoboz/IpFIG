@@ -1,43 +1,43 @@
 import requests
+from colorama import Fore,Style
 
-
-
-print("""
+print(F"""{Fore.CYAN}
    ____     ____                
   /  _/__  / __/__  ___________ 
  _/ // _ \/ _// _ \/ __/ __/ -_)
 /___/ .__/_/  \___/_/  \__/\__/ 
    /_/                               
-                    Coded By Yigoboz | https://github.com/
+                   {Style.RESET_ALL} Coded By Yigoboz | https://github.com/
 """)
 
 def check():
     r = requests.get("https://ipinfo.io/")
-    print("\n Database checking...\n")
+    print(F"\n {Fore.YELLOW} Database checking... {Style.RESET_ALL}\n")
     if r.status_code == 200:
-        print("[+] Database is active! \n")
+        print(F"{Fore.GREEN} [+] Database is active! {Style.RESET_ALL} \n")
     else:
-        print("\n [!] Database is not active \n")
-        print("[?] Exiting.....")
+        print(F"\n {Fore.RED} [!] Database is not active  {Style.RESET_ALL} \n")
+        print(F" {Fore.RED} [?] Exiting..... {Style.RESET_ALL}")
         exit()
 
-ip = input("Target Ip: ")
+try:
+    ip = input("Target Ip: ")
+    check()
+    country = requests.get("https://ipinfo.io/{}/country/".format(ip)).text
+    city = requests.get("https://ipinfo.io/{}/city/".format(ip)).text
+    region = requests.get("https://ipinfo.io/{}/region/".format(ip)).text
+    postal = requests.get("https://ipinfo.io/{}/postal/".format(ip)).text
+    timezone = requests.get("https://ipinfo.io/{}/timezone/".format(ip)).text
+    orgination = requests.get("https://ipinfo.io/{}/org/".format(ip)).text
+    location =  requests.get("https://ipinfo.io/{}/loc/".format(ip)).text
 
-check()
-
-country = requests.get("https://ipinfo.io/{}/country/".format(ip)).text
-city = requests.get("https://ipinfo.io/{}/city/".format(ip)).text
-region = requests.get("https://ipinfo.io/{}/region/".format(ip)).text
-postal = requests.get("https://ipinfo.io/{}/postal/".format(ip)).text
-timezone = requests.get("https://ipinfo.io/{}/timezone/".format(ip)).text
-orgination = requests.get("https://ipinfo.io/{}/org/".format(ip)).text
-location =  requests.get("https://ipinfo.io/{}/loc/".format(ip)).text
-
-print("İp: "+ip)
-print("Country: "+country)
-print("City: "+city)
-print("Region: "+region)
-print("Postal: "+postal)
-print("TimeZone: "+timezone)
-print("Orgination: "+orgination)
-print("Location: "+location)
+    print(F"{Fore.GREEN} İp: {Style.RESET_ALL}"+ip)
+    print(F"{Fore.GREEN} Country: {Style.RESET_ALL}"+country)
+    print(F"{Fore.GREEN} City: {Style.RESET_ALL}"+city)
+    print(F"{Fore.GREEN} Region: {Style.RESET_ALL}"+region)
+    print(F"{Fore.GREEN} Postal: {Style.RESET_ALL}"+postal)
+    print(F"{Fore.GREEN} TimeZone: {Style.RESET_ALL}"+timezone)
+    print(F"{Fore.GREEN} Orgination: {Style.RESET_ALL}"+orgination)
+    print(F"{Fore.GREEN} Location: {Style.RESET_ALL}"+location)
+except KeyboardInterrupt:
+    print(F"\n {Fore.RED} CTRL+C Detected! {Style.RESET_ALL}")
